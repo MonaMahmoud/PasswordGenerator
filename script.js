@@ -15,16 +15,20 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword(){
+  //strings containing different password choices
   var upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
   var specialAlphabet =' !"#$%&,()*+-./:;<=>?@[]_^`{}|~\\\'';
   var numericAlphabet = "0123456789";
   var pass = "";
 
+  //password length entered by user
   var passwordLength;
+  //indicates whether password length has met required conditions (number between 8 and 128)
   var conditions=false;
 
   do{
+    //ask user about password length
     passwordLength = prompt("How many chars in the password? Please enter a number between 8 and 128.");
     //check that user entered a number between the specified range
     if(parseInt(passwordLength)!=NaN && passwordLength>=8 &&passwordLength<=128){
@@ -37,205 +41,44 @@ function generatePassword(){
   //ask user for password choices and store them in boolean variables
   var lowerCase = confirm("Include lower case characters?");
   var upperCase = confirm("Include upper case characters?");
-  
   var numeric = confirm("Include numbers?");
   var specialChars = confirm("Include special characters?")
   
+  //loop counter
   var i;
+  //length of each choice section
   var sectionLength;
   
-  //1
-  //user chose all 4 options
-  if(upperCase&&lowerCase&&specialChars&&numeric){
-    sectionLength=Math.floor(passwordLength/4);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%4)!=0){
-      for(i=0;i<(passwordLength%4);i++){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    } 
-  }
-  //2
-  //user chose 3 out of 4
-  else if(upperCase&&lowerCase&&specialChars&&!numeric){
-    sectionLength = Math.floor(passwordLength/3);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%3)!=0){
-      for(i=0;i<(passwordLength%3);i++){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    } 
-  }
-  //3
-  //user chose 3 out of 4
-  else if(upperCase&&lowerCase&&!specialChars&&numeric){
-    sectionLength = Math.floor(passwordLength/3);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-    if((passwordLength%3)!=0){
-      for(i=0;i<(passwordLength%3);i++){
-        pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-    }
-  }
-  //4
-  //user chose 3 out of 4
-  else if(upperCase&&!lowerCase&&specialChars&&numeric){
-    sectionLength = Math.floor(passwordLength/3);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%3)!=0){
-      for(i=0;i<(passwordLength%3);i++){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    }
-  }
-  //5
-  //user chose 3 out of 4
-  else if(!upperCase&&lowerCase&&specialChars&&numeric){
-    sectionLength = Math.floor(passwordLength/3);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%3)!=0){
-      for(i=0;i<(passwordLength%3);i++){
-        pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-    }
-  }
-  //6
-  //user chose 2 out of 4 options
-  else if(!upperCase&&!lowerCase&&specialChars&&numeric){
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-  }
-  //7
-  //user chose 2 out of 4 options
-  else if(upperCase&&lowerCase&&!specialChars&&!numeric){
+  
 
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-    }
+  if(!upperCase&&!lowerCase&&!numeric&&!specialChars){
+    alert("Can't generate password. Please choose at least one option.");
   }
-  //8
-  //user chose 2 out of 4 options
-  else if(!upperCase&&lowerCase&&specialChars&&!numeric){
-
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-
-  }
-  //9
-  //user chose 2 out of 4 options
-  else if(upperCase&&!lowerCase&&!specialChars&&numeric){
-
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-
-  }
-
-  //10
-  //user chose 2 out of 4 options
-  else if(!upperCase&&lowerCase&&!specialChars&&numeric){
-
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-      
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-
-  }
-  //11
-  //user chose 2 out of 4 options
-  else if(upperCase&&!lowerCase&&specialChars&&!numeric){
-
-    sectionLength = Math.floor(passwordLength/2);
-    for(i=0;i<sectionLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-      
-    }
-    if((passwordLength%2)!=0){
-        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-  }
-  //12
-  //user chose 1 out of 4 options
-  else if(upperCase&&!lowerCase&&!specialChars&&!numeric){
-    for(i=0;i<passwordLength;i++){
-      pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
-    }
-  }
-  //13
-  //user chose 1 out of 4 options
-  else if(!upperCase&&lowerCase&&!specialChars&&!numeric){
-    for(i=0;i<passwordLength;i++){
-      pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
-    }
-  }
-  //14
-  //user chose 1 out of 4 options
-  else if(!upperCase&&!lowerCase&&specialChars&&!numeric){
-    for(i=0;i<passwordLength;i++){
-      pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
-    }
-  }
-  //15
-  //user chose 1 out of 4 options
-  else if(!upperCase&&!lowerCase&&!specialChars&&numeric){
-    for(i=0;i<passwordLength;i++){
-      pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
-    }
-  }
-  //16
-  //no choice was selected
   else{
-    alert("Couldn't generate password. Please choose at least one option.");
+
+    for(i=0;i<passwordLength;){
+      if(upperCase){
+        pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
+        i++;
+      }
+      if(lowerCase&&i<passwordLength){
+        pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
+        i++;
+      }
+  
+      if(numeric&&i<passwordLength){
+        pass = pass.concat(numericAlphabet.charAt(Math.floor(Math.random() * numericAlphabet.length)).toString());
+        i++;
+      }
+  
+      if(specialChars&&i<passwordLength){
+        pass = pass.concat(specialAlphabet.charAt(Math.floor(Math.random() * specialAlphabet.length)).toString());
+        i++;
+      }
+  
+    }
+
   }
+
   return pass;
 }
