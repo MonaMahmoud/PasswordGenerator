@@ -21,25 +21,33 @@ function generatePassword(){
   var numericAlphabet = "0123456789";
   var pass = "";
 
-  var passwordLength = prompt("How many chars in the password?");
-  //neeed to check for char values first
-  while (passwordLength<8 || passwordLength>128){
-    alert("Password must be at least 8 characters and max of 128 characters");
-    passwordLength = prompt("How many chars in the password?");
-  }
-  
+  var passwordLength;
+  var conditions=false;
+
+  do{
+    passwordLength = prompt("How many chars in the password? Please enter a number between 8 and 128.");
+    //check that user entered a number between the specified range
+    if(parseInt(passwordLength)!=NaN && passwordLength>=8 &&passwordLength<=128){
+      passwordLength = parseInt(passwordLength);
+      conditions=true;
+    }
+  //loop again until user inputs a number within specified range  
+  }while(!conditions);
+
+  //ask user for password choices and store them in boolean variables
   var lowerCase = confirm("Include lower case characters?");
   var upperCase = confirm("Include upper case characters?");
-  var specialChars = confirm("Include special characters?")
+  
   var numeric = confirm("Include numbers?");
-
+  var specialChars = confirm("Include special characters?")
   
   var i;
   var sectionLength;
-  //alert(sectionLength);
+  
   //1
   //user chose all 4 options
   if(upperCase&&lowerCase&&specialChars&&numeric){
+    sectionLength=Math.floor(passwordLength/4);
     for(i=0;i<sectionLength;i++){
       pass = pass.concat(lowerAlphabet.charAt(Math.floor(Math.random() * lowerAlphabet.length)).toString());
       pass = pass.concat(upperAlphabet.charAt(Math.floor(Math.random() * upperAlphabet.length)).toString());
